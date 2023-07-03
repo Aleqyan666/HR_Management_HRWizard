@@ -16,5 +16,6 @@ public interface UserRepository extends JpaRepository<UserModel,Long> {
     List<UserModel> findByEmployeeLevel(EmployeeLevel employeeLevel);
     List<UserModel> findByPosition(String position);
     List<UserModel> findByGender(Gender gender);
+    UserModel getUserModelById(Long id);
 
 }
