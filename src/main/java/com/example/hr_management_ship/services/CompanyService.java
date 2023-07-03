@@ -1,5 +1,6 @@
 package com.example.hr_management_ship.services;
 
+import com.example.hr_management_ship.models.UserModel;
 import com.example.hr_management_ship.models.enumes.CompanySize;
 import com.example.hr_management_ship.models.enumes.Role;
 import com.example.hr_management_ship.models.CompanyModel;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +44,42 @@ public class CompanyService {
 //        CompanyModel companyToDB = companyRepository.save(companyModel);
 //        companyToDB.setLogo(companyToDB.getLogo());
         companyRepository.save(companyModel);
+        return true;
+    }
+
+    public boolean createUserInCompany(Principal principal,UserModel user) {
+        user.setCompany(getCompanyByPrincipal(principal));
+        CompanyModel company = getCompanyByPrincipal(principal);
+        if (company == null) {
+            return false;
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.getRoles().add(Role.USER);
+        user.setCompany(company);
+        user.setActive(true);
+
+        company.getUsers().add(user);
+        companyRepository.save(company);
+
+        return true;
+    }
+
+    public boolean createAdminInCompany(Principal principal, UserModel user, Long companyId) {
+        user.setCompany(getCompanyByPrincipal(principal));
+        CompanyModel company = companyRepository.findById(companyId).orElse(null);
+        if (company == null) {
+            return false;
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.getRoles().add(Role.ADMIN);
+        user.setCompany(company);
+        user.setActive(true);
+
+        company.getUsers().add(user);
+        companyRepository.save(company);
+
         return true;
     }
 

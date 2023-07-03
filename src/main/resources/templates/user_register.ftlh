@@ -14,30 +14,27 @@
 <div class="section" id="result-container">
     <div class="container">
         <div class="section_header">
-            <h2 class="section_title">Company registration</h2>
+            <h2 class="section_title">User registration</h2>
         </div>
-        <form action="/signup" method="post" enctype="multipart/form-data">
-            Company name: <label>
-                <input type="text" name="name">
+        <form action="/registerUser" method="post">
+            User first_name: <label>
+                <input type="text" name="firstName">
+            </label><br><br>
+            User last_name: <label>
+                <input type="text" name="lastName">
             </label><br><br>
             Password: <label>
                 <input type="password" name="password">
             </label><br><br>
-            Company email: <label>
+            User email: <label>
                 <input type="email" name="email">
             </label><br><br>
-            Company phone: <label>
-                <input type="text" name="phone_number">
+            User phone: <label>
+                <input type="text" name="phoneNumber">
             </label><br><br>
-<#--            Company logo: <label>-->
-<#--                <input type="file" name="logo"/>-->
-<#--            </label><br><br>-->
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <input type="submit" value="SIGN_UP">
+            <input type="submit" value="Create">
         </form>
-        <#if erroreMessage??>
-            <h2 style='color: red'>${errorMessage}</h2>
-        </#if>
     </div>
 </div>
 

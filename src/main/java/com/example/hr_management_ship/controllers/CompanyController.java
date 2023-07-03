@@ -31,7 +31,6 @@ public class CompanyController {
             model.addAttribute("errorMessage", "Company with " + company.getEmail() + " email we have!");
             return "signup";
         }
-//        companyService.creatCompany(company, file);
-        return "redirect: /login";
+        return "redirect:/login";
     }
 }
