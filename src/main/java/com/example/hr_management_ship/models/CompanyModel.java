@@ -17,7 +17,7 @@ public class CompanyModel {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "password", nullable = false, length = 1000, unique = true)
+    @Column(name = "password", nullable = false, length = 1000)
     private String password;
     @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;

@@ -30,9 +30,9 @@ public class UserModel {
     private String email;
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-    @Column(name = "password", nullable = false, length = 1000, unique = true)
+    @Column(name = "password", nullable = false, length = 1000)
     private String password;
-    @Column(name = "dob", nullable = false)
+    @Column(name = "dob")
     private LocalDateTime dayOfBirth;
     @Column(name = "social_site")
     private String linkedIn;

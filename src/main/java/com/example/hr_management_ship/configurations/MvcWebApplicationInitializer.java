@@ -9,5 +9,7 @@ public class MvcWebApplicationInitializer implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/signup").setViewName("signup");
+        registry.addViewController("/registerUser").setViewName("user_register");
+        registry.addViewController("/registerAdmin").setViewName("user_register");
     }
 }
