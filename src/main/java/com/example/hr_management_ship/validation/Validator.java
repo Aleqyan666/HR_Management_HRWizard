@@ -4,6 +4,8 @@ import com.example.hr_management_ship.exception.*;
 import com.example.hr_management_ship.models.enumes.CoinRating;
 import com.example.hr_management_ship.models.enumes.EmployeeLevel;
 import com.example.hr_management_ship.models.enumes.Gender;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +17,7 @@ public class Validator {
 
     /**
      * checks validity of user's first name: can't contain other symbols except letters
+     *
      * @param firstName
      * @return true/exception regarding the given parameter
      */
@@ -26,6 +29,7 @@ public class Validator {
 
     /**
      * checks validity of user's last name: can't contain other symbols except letters
+     *
      * @param lastName
      * @return true/exception regarding the given parameter
      */
@@ -37,49 +41,52 @@ public class Validator {
 
     /**
      * checks validity of user's phone: can't contain other symbols except numbers
+     *
      * @param phone
      * @return true/exception regarding the given parameter
      */
     public static boolean checkPhoneNumber(String phone) {
-        String pattern = "^[1-9]\\d{9}$";
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(phone);
-        return matcher.matches();
+        if (phone.matches("^[1-9]\\d{9}$")) {
+            return true;
+        } else throw new PhoneNumberException();
+
     }
 
     /**
      * checks validity of user's email: must contain '@'
+     *
      * @param email
      * @return true/exception regarding the given parameter
      */
     public static boolean checkEmail(String email) {
-        String patternString = "^[\\w.-]+@[\\w.-]+\\.[\\w]+$";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        if (email.matches("^[\\w.-]+@[\\w.-]+\\.[\\w]+$")) {
+            return true;
+        } else throw new InvalidMailException();
+    }
+
+    public static boolean checkLinkedin(String linkedin) {
+        if (linkedin.matches("^(http(s)?:\\\\/\\\\/)?(www\\\\.)?linkedin\\\\.com\\\\/(in|profile\\\\/)?[a-zA-Z0-9._-]+(\\\\/)?$\"")) {
+            return true;
+        } else throw new InvalidLinkedinException();
     }
 
 
     /**
      * checks validity of user's date of birth: must have (dd/mm/yyyy) form
+     *
      * @param dob
      * @return true/exception regarding the given parameter
      */
     public static boolean checkDate(String dob) {
-        if (dob.length() > 10 || dob.length() < 8) {
-            throw new DateOfBirthException();
-        } else {
-            String pattern = "\\d{2}/\\d{2}/\\d{4}";
-            Pattern regex = Pattern.compile(pattern);
-            Matcher matcher = regex.matcher(dob);
-            return matcher.matches();
-        }
+        if (dob.length() < 11 && dob.length() > 7 && dob.matches("\\d{2}/\\d{2}/\\d{4}")) {
+            return true;
+        } else throw new DateOfBirthException();
     }
-
 
 
     /**
      * checks validity of user's expertise level: must have certain value
+     *
      * @param employeeLevel
      * @return true/exception regarding the given parameter
      */
@@ -96,36 +103,51 @@ public class Validator {
 
     /**
      * checks validity of user's coins: must have certain value
+     *
      * @param coinRating
      * @return true/exception regarding the given parameter
      */
+
+
     public static boolean checkCoinRating(CoinRating coinRating) {
         if (coinRating.equals(CoinRating.VALUE1) || coinRating.equals(CoinRating.VALUE2)
-         || coinRating.equals(CoinRating.VALUE3) || coinRating.equals(CoinRating.VALUE4)
-         || coinRating.equals(CoinRating.VALUE5) || coinRating.equals(CoinRating.VALUE6)
-         || coinRating.equals(CoinRating.VALUE7) || coinRating.equals(CoinRating.VALUE8)
-         || coinRating.equals(CoinRating.VALUE9) || coinRating.equals(CoinRating.VALUE10)){
+                || coinRating.equals(CoinRating.VALUE3) || coinRating.equals(CoinRating.VALUE4)
+                || coinRating.equals(CoinRating.VALUE5) || coinRating.equals(CoinRating.VALUE6)
+                || coinRating.equals(CoinRating.VALUE7) || coinRating.equals(CoinRating.VALUE8)
+                || coinRating.equals(CoinRating.VALUE9) || coinRating.equals(CoinRating.VALUE10)) {
             return true;
-        }else{
+        } else {
             throw new InvalidCoinRatingException();
         }
     }
 
     /**
      * checks validity of user's gender: must either be male or female
+     *
      * @param gender
      * @return true/exception regarding the given parameter
      */
-    public static boolean checkGender(Gender gender){
-        if (gender.equals(Gender.MALE) ||  gender.equals(Gender.FEMALE)){
+    public static boolean checkGender(Gender gender) {
+        if (gender.equals(Gender.MALE) || gender.equals(Gender.FEMALE)) {
             return true;
-        }else{
+        } else {
             throw new InvalidGenderException();
         }
     }
 
+    public static boolean checkPassword(String password) {
+        // Check if the password is at least 8 characters long
+        if (password.length() < 8 && password.matches(".*[A-Z].*")
+                && password.matches(".*[a-z].*")
+                && password.matches(".*\\d.*")
+                && password.matches(".*[!@#$%^&*()].*")) {
+            return true;
+        }else throw new PasswordRuleException();
+    }
+
     /**
      * eliminates possible exceptions: Such as NullPointerException
+     *
      * @param entity
      * @param <E>
      */
@@ -138,6 +160,7 @@ public class Validator {
 
     /**
      * checks validity of user's id
+     *
      * @param id
      */
     public static void checkId(long id) {
@@ -148,6 +171,7 @@ public class Validator {
 
     /**
      * checks whether the given list is empty or not
+     *
      * @param listCheck
      * @param <E>
      */

@@ -52,11 +52,10 @@ public class UserModel {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn
     private CompanyModel company;
-
-//    @Column(name = "total_coins")sranq rating-i hamar en petq + coin uxarkelu
-//    private Long totalCoins = 0L;
-//    @Column(name = "total_transactions")
-//    private Long totalTransactions = 0L;
+    @Column(name = "total_coins")
+    private Long totalCoins = 0L;
+    @Column(name = "total_transactions")
+    private Long totalTransactions = 0L;
 
     @PrePersist
     private void init() {
