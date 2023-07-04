@@ -56,6 +56,11 @@ public class UserModel {
     @JoinColumn
     private CompanyModel company;
 
+//    @Column(name = "total_coins")sranq rating-i hamar en petq + coin uxarkelu
+//    private Long totalCoins = 0L;
+//    @Column(name = "total_transactions")
+//    private Long totalTransactions = 0L;
+
     @PrePersist
     private void init() {
         dateOfCreate = LocalDateTime.now();
