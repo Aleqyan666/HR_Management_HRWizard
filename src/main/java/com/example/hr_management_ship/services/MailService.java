@@ -26,8 +26,7 @@ public class MailService {
         javaMailSender.send(message);
     }
 
-    private void sendEmailWithStatistics(
-            String toEmail) throws MessagingException {
+    private void sendEmailWithStatistics(String toEmail) throws MessagingException {
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);

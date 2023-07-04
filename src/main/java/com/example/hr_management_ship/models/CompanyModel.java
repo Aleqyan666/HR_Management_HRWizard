@@ -33,11 +33,9 @@ public class CompanyModel {
     private Image logo;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "company")
     private List<UserModel> users = new ArrayList<>();
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "company_role",
-            joinColumns = @JoinColumn(name = "company_id"))
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<>();
+    private Role role;
     @PrePersist
     private void init() {
         dateOfCreate = LocalDateTime.now();

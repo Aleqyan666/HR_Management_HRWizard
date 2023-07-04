@@ -37,10 +37,10 @@ public class UserService {
         return userRepository.findByLastName(lastName);
     }
 
-    public List<UserModel> searchUserByEmployeeLevel(EmployeeLevel employeeLevel) {
-        Validator.checkEmployeeLevel(employeeLevel);
-        return userRepository.findByEmployeeLevel(employeeLevel);
-    }
+//    public List<UserModel> searchUserByEmployeeLevel(EmployeeLevel employeeLevel) {
+//        Validator.checkEmployeeLevel(employeeLevel);
+//        return userRepository.findByEmployeeLevel(employeeLevel);
+//    }
 
     public List<UserModel> searchUserByPosition(String position) {
         return userRepository.findByPosition(position);

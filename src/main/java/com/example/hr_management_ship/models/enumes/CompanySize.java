@@ -1,8 +1,7 @@
 package com.example.hr_management_ship.models.enumes;
 
-import org.springframework.security.core.GrantedAuthority;
 
-public enum CompanySize implements GrantedAuthority {
+public enum CompanySize {
     SMALL(1, 50),
     MEDIUM(51, 100),
     LARGE(101, Integer.MAX_VALUE);
@@ -23,8 +22,4 @@ public enum CompanySize implements GrantedAuthority {
         return maxEmployees;
     }
 
-    @Override
-    public String getAuthority() {
-        return name();
-    }
 }

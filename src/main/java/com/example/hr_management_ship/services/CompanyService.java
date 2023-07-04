@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class CompanyService {
 //        }
         companyModel.setPassword(passwordEncoder.encode(companyModel.getPassword()));
         companyModel.setCompanySize(CompanySize.SMALL);
-        companyModel.getRoles().add(Role.SUPER_ADMIN);
+        companyModel.setRole(Role.SUPER_ADMIN);
         String subject = "Company Registration Confirmation";
         String text = "Thank you for registering your company with Ship.";
         mailService.sendEmail(email, subject, text);
@@ -55,7 +54,7 @@ public class CompanyService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.USER);
+        user.setRole(Role.USER);
         user.setCompany(company);
         user.setActive(true);
 
@@ -73,7 +72,7 @@ public class CompanyService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ADMIN);
+        user.setRole(Role.ADMIN);
         user.setCompany(company);
         user.setActive(true);
 
