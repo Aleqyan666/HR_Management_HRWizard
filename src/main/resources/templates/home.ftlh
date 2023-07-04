@@ -25,10 +25,9 @@
         </table>
         <#elseif user??>
             <h3><i>${user.firstName}</i></h3>>
-            <form action="/logout" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <input type="submit" value="Logout">
-            </form>
+            <a href="/profile">
+                <img src="avatar.png" alt="mdo">
+            </a>
         <#else >
         <div class="header_inner">
             <div class="header_logo">Ship</div>

@@ -24,7 +24,7 @@ public class RegistrationController {
 
     @GetMapping("/registerAdmin")
     public String adminRegistration() {
-        return "user_register";
+        return "admin_register";
     }
 
     @PostMapping("/registerUser")
@@ -37,8 +37,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/registerAdmin")
-    public String registerAdmin(@ModelAttribute("user") UserModel user, @RequestParam("companyId") Long companyId, Principal principal) {
-        if (companyService.createAdminInCompany(principal, user, companyId)) {
+    public String registerAdmin(@ModelAttribute("user") UserModel user, Principal principal) {
+        if (companyService.createAdminInCompany(principal, user)) {
             return "redirect:/";
         } else {
             return "redirect:/signup?error";

@@ -64,9 +64,9 @@ public class CompanyService {
         return true;
     }
 
-    public boolean createAdminInCompany(Principal principal, UserModel user, Long companyId) {
+    public boolean createAdminInCompany(Principal principal, UserModel user) {
         user.setCompany(getCompanyByPrincipal(principal));
-        CompanyModel company = companyRepository.findById(companyId).orElse(null);
+        CompanyModel company = getCompanyByPrincipal(principal);
         if (company == null) {
             return false;
         }

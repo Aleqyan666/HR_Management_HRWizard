@@ -41,4 +41,8 @@ public class CompanyModel {
         dateOfCreate = LocalDateTime.now();
     }
 
+    public List<UserModel> getAllUsers() {
+        return users;
+    }
+
 }

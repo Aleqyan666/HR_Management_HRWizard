@@ -62,4 +62,8 @@ public class UserModel {
         dateOfCreate = LocalDateTime.now();
     }
 
+    public boolean isAdmin() {
+        return role.equals(Role.ADMIN);
+    }
+
 }
