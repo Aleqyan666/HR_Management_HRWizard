@@ -1,10 +1,8 @@
 package com.example.hr_management_ship.services;
 
 import com.example.hr_management_ship.exception.PasswordRuleException;
-import com.example.hr_management_ship.models.CompanyModel;
 import com.example.hr_management_ship.models.UserModel;
 import com.example.hr_management_ship.models.enumes.CoinRating;
-import com.example.hr_management_ship.models.enumes.EmployeeLevel;
 import com.example.hr_management_ship.models.enumes.Gender;
 import com.example.hr_management_ship.repositorys.UserRepository;
 import com.example.hr_management_ship.validation.Validator;
@@ -22,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final CompanyService companyService;
 
     public UserModel getUserByPrincipal(Principal principal) {
         if (principal == null) {
