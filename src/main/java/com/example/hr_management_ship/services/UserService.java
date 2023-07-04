@@ -7,6 +7,7 @@ import com.example.hr_management_ship.models.enumes.EmployeeLevel;
 import com.example.hr_management_ship.models.enumes.Gender;
 import com.example.hr_management_ship.repositorys.UserRepository;
 import com.example.hr_management_ship.validation.Validator;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final MailService mailService;
 
     public UserModel getUserByPrincipal(Principal principal) {
         if (principal == null) {
@@ -202,4 +204,28 @@ public class UserService {
             throw e;
         }
     }
+
+    public void getEmployeePerformance(String toEmail) throws MessagingException {
+        mailService.monitorEmployeePerformance(toEmail);
+    }
+
+    public void notificationSenderBasedOnRating(long id){
+        mailService.notifyBasedOnRating(id);
+    }
+
+    public void removeUser(long id) {
+        log.info("removeUser method called with userId: " + id);
+
+        try {
+            Validator.checkId(id);
+            UserModel user = userRepository.getUserModelById(id);
+            Validator.checkEntity(user);
+            userRepository.delete(user);
+            log.info("User removed successfully with userId: " + id);
+        } catch (Exception e) {
+            log.error("An error occurred while removing the user", e);
+            throw e;
+        }
+    }
+
 }
