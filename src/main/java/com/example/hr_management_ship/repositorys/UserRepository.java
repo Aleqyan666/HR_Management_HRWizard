@@ -1,7 +1,6 @@
 package com.example.hr_management_ship.repositorys;
 
 import com.example.hr_management_ship.models.UserModel;
-import com.example.hr_management_ship.models.enumes.EmployeeLevel;
 import com.example.hr_management_ship.models.enumes.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

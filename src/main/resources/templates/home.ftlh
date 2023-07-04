@@ -24,7 +24,7 @@
             </tr>
         </table>
         <#elseif user??>
-            <h3>${user.firstName}</h3>>
+            <h3><i>${user.firstName}</i></h3>>
             <form action="/logout" method="post">
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <input type="submit" value="Logout">
